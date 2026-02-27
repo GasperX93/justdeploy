@@ -90,16 +90,20 @@ swarmToggle.addEventListener('click', () => {
 });
 
 function showSteps(level) {
+  const section = document.getElementById('steps-' + level);
+  const card = document.querySelector('[data-level="' + level + '"]');
+  const isActive = card.classList.contains('active');
+
   // hide all
   document.querySelectorAll('.steps-section').forEach(el => el.classList.remove('visible'));
   document.querySelectorAll('.skill-card').forEach(el => el.classList.remove('active'));
 
-  // show selected
-  document.getElementById('steps-' + level).classList.add('visible');
-  document.querySelector('[data-level="' + level + '"]').classList.add('active');
-
-  // scroll to steps
-  setTimeout(() => {
-    document.getElementById('steps-' + level).scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 50);
+  // if it wasn't active, show it
+  if (!isActive) {
+    section.classList.add('visible');
+    card.classList.add('active');
+    setTimeout(() => {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+  }
 }
