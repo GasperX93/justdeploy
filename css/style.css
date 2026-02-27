@@ -640,6 +640,18 @@ nav {
   color: var(--accent);
 }
 
+/* STEP NOTE */
+.step-note {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-left: 3px solid var(--accent);
+  background: rgba(245,166,35,0.06);
+  border-radius: 0 8px 8px 0;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
 /* TIME BADGE */
 .time-estimate {
   display: flex;

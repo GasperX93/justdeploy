@@ -80,7 +80,7 @@
       <h2><i data-lucide="upload-cloud"></i> Deploy via Beeport</h2>
       <span class="tool-badge badge-green">No install needed</span>
     </div>
-    <div class="time-estimate"><i data-lucide="clock"></i> Total time: <span class="time-hl">~5 minutes</span> · wallet + small amount of any token on any chain required</div>
+    <div class="time-estimate"><i data-lucide="clock"></i> Total time: <span class="time-hl">~5 minutes</span></div>
 
     <div class="step">
       <div class="step-num">01</div>
@@ -106,6 +106,7 @@
           <li>Select a storage size and duration</li>
           <li>Click <strong>Buy Storage</strong> and confirm the transaction in your wallet</li>
         </ul>
+        <div class="step-note">⚠ Storage expires when your stamp runs out — if it hits zero, your site will be taken offline. To extend: go to the <strong>Upload</strong> tab, find your stamp under <strong>Your Stamps</strong>, and click <strong>+ Top Up</strong>.</div>
       </div>
     </div>
 
@@ -130,7 +131,7 @@
         <div class="step-desc">In the <strong>History</strong> tab, find your upload and click the <strong>ENS</strong> button.</div>
         <ul class="step-list">
           <li>Select your <code>.eth</code> domain, click <strong>Set Content Hash</strong>, confirm in your wallet</li>
-          <li>Your site will be live at <code>yourname.eth.limo</code> and <code>yourname.bzz.link</code> within minutes</li>
+          <li>Your site will be live at <code>yourname.eth.limo</code> and <code>yourname.bzz.link</code> within minutes <span class="tip" data-tip="eth.limo and bzz.link are centralized gateways. Your site can also be served directly via its Swarm hash for anyone running a Bee node."></span></li>
           <li>No ENS domain yet? Click <strong>Register Domain</strong> in the same dialog to get one directly in Beeport</li>
         </ul>
       </div>
@@ -183,6 +184,7 @@
           <li>Drag the <strong>Data persistence</strong> slider to set how long you need storage (1–365 days)</li>
           <li>Review the estimated cost shown by the app, then click <strong>Buy New Stamp</strong></li>
         </ul>
+        <div class="step-note">⚠ Storage expires when your stamp runs out — if it hits zero, your site will be taken offline. To extend: go to <strong>Account → Stamps</strong>, expand your stamp, and click <strong>Topup</strong>.</div>
       </div>
     </div>
 
@@ -215,11 +217,30 @@
     <div class="step">
       <div class="step-num">06</div>
       <div class="step-content">
-        <div class="step-title">Share & update</div>
-        <div class="step-desc">Go to <strong>Account → Feeds</strong>, click your feed, and use <strong>View Feed Page</strong> to copy your permanent Feed Manifest URL.</div>
+        <div class="step-title">Link your ENS domain</div>
+        <div class="step-desc">Go to <strong>Account → Feeds</strong>, click your feed, and use <strong>View Feed Page</strong> to copy your permanent Feed Manifest URL. Then set it as your ENS content hash.</div>
         <ul class="step-list">
-          <li>Use this URL for your ENS <code>contenthash</code> record — it never changes, even when you redeploy</li>
-          <li>To update your site: re-upload the new build via <strong>Files → Add Website</strong>, then click <strong>Update Feed</strong> again</li>
+          <li>Go to <a href="https://app.ens.domains" target="_blank" style="color:var(--accent)">app.ens.domains</a> and open your <code>.eth</code> domain</li>
+          <li>Go to the <strong>Records</strong> tab and click <strong>Edit Records</strong></li>
+          <li>In the <strong>Content Hash</strong> field, paste your Feed Manifest URL</li>
+          </ul>
+          <div class="step-code"><span style="color:var(--muted)">bzz://</span>&lt;your-feed-manifest-hash&gt;</div>
+          <ul class="step-list" style="margin-top:8px">
+          <li>Save and confirm the transaction in your wallet</li>
+          <li>Your site will be live at <code>yourname.eth.limo</code> and <code>yourname.bzz.link</code> within minutes <span class="tip" data-tip="eth.limo and bzz.link are centralized gateways. Your site can also be served directly via its Swarm hash for anyone running a Bee node."></span></li>
+        </ul>
+        <a class="step-action" href="https://app.ens.domains" target="_blank">→ Open ENS App</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">07</div>
+      <div class="step-content">
+        <div class="step-title">Update your site</div>
+        <div class="step-desc">Re-upload whenever your site changes — the Feed Manifest URL stays the same so your ENS record never needs updating.</div>
+        <ul class="step-list">
+          <li>Go to <strong>Files → Add Website</strong> and select your new build folder</li>
+          <li>After upload completes, click <strong>Update Feed</strong> again</li>
         </ul>
       </div>
     </div>
@@ -303,8 +324,10 @@
 
         <div class="step-code" id="stamp-cmd"><span>$</span> swarm-cli stamp buy --amount 40053139230 --depth 20 --immutable false
 </div>
-        <div class="step-desc" style="margin-top:10px">The CLI shows an estimate and asks you to confirm. Save the <strong>Stamp ID</strong> returned. To extend later:</div>
-        <div class="step-code"><span>$</span> swarm-cli stamp topup --stamp &lt;STAMP_ID&gt; --amount &lt;AMOUNT&gt;</div>
+        <div class="step-desc" style="margin-top:10px">The CLI shows an estimate and asks you to confirm. Save the <strong>Stamp ID</strong> returned.</div>
+        <div class="step-note">⚠ Storage expires when your stamp runs out — if it hits zero, your site will be taken offline.</div>
+        <div class="step-desc" style="margin-top:10px">Extend postage stamp before it runs out:</div>
+        <div class="step-code" style="margin-top:8px"><span>$</span> swarm-cli stamp topup --stamp &lt;STAMP_ID&gt; --amount &lt;AMOUNT&gt;</div>
         <div class="step-desc" style="margin-top:10px">On repeat deploys, check existing stamps first:</div>
         <div class="step-code"><span>$</span> swarm-cli stamp list</div>
       </div>
@@ -338,14 +361,32 @@
         </div>
         <ul class="step-list" style="margin-top:10px">
           <li><strong>URL</strong> — the content hash, changes with every upload</li>
-          <li><strong>Feed Manifest URL</strong> — permanent, always points to the latest version</li>
-          <li>Use the <strong>Feed Manifest URL</strong> for your ENS <code>contenthash</code> record — it never changes, even when you redeploy</li>
+          <li><strong>Feed Manifest URL</strong> — permanent, always points to the latest version — copy this for the next step</li>
         </ul>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">07</div>
+      <div class="step-content">
+        <div class="step-title">Link your ENS domain</div>
+        <div class="step-desc">Set your Feed Manifest URL as the content hash on your <code style="color:var(--accent);font-family:var(--font-mono)">.eth</code> domain.</div>
+        <ul class="step-list">
+          <li>Go to <a href="https://app.ens.domains" target="_blank" style="color:var(--accent)">app.ens.domains</a> and open your <code>.eth</code> domain</li>
+          <li>Go to the <strong>Records</strong> tab and click <strong>Edit Records</strong></li>
+          <li>In the <strong>Content Hash</strong> field, paste your Feed Manifest URL</li>
+          </ul>
+          <div class="step-code"><span style="color:var(--muted)">bzz://</span>&lt;your-feed-manifest-hash&gt;</div>
+          <ul class="step-list" style="margin-top:8px">
+          <li>Save and confirm the transaction in your wallet</li>
+          <li>Your site will be live at <code>yourname.eth.limo</code> and <code>yourname.bzz.link</code> within minutes <span class="tip" data-tip="eth.limo and bzz.link are centralized gateways. Your site can also be served directly via its Swarm hash for anyone running a Bee node."></span></li>
+        </ul>
+        <a class="step-action" href="https://app.ens.domains" target="_blank">→ Open ENS App</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">08</div>
       <div class="step-content">
         <div class="step-title">Update & verify</div>
         <div class="step-desc">To redeploy, run the same feed upload command — the Feed Manifest URL stays the same automatically.</div>
