@@ -10,7 +10,7 @@ Walks users through three deployment paths based on their comfort level:
 |---|---|---|
 | **Easy** | [Beeport](https://beeport.ethswarm.org) | Browser-only, wallet required, no install |
 | **Intermediate** | [Swarm Desktop](https://desktop.ethswarm.org) | GUI app, local node, repeat deploys |
-| **Advanced** | Bee + [swarm-cli](https://github.com/ethersphere/swarm-cli) | CLI, scriptable, CI/CD |
+| **Advanced** | [Bee](https://github.com/ethersphere/bee) + [swarm-cli](https://github.com/ethersphere/swarm-cli) | CLI, scriptable, CI/CD |
 
 
 ## Key interactions
