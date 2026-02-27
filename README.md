@@ -12,25 +12,6 @@ Walks users through three deployment paths based on their comfort level:
 | **Intermediate** | [Swarm Desktop](https://desktop.ethswarm.org) | GUI app, local node, repeat deploys |
 | **Advanced** | Bee + [swarm-cli](https://github.com/ethersphere/swarm-cli) | CLI, scriptable, CI/CD |
 
-## Run locally
-
-No build step. Open `index.html` directly or serve it:
-
-```sh
-python3 -m http.server 8080
-# or
-npx serve .
-```
-
-## Structure
-
-```
-justdeploy/
-├── index.html        # all markup
-├── css/style.css     # all styles, CSS custom properties for theming
-├── js/main.js        # interaction logic
-└── favicon.svg       # inline SVG favicon
-```
 
 ## Key interactions
 
