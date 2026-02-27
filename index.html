@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>justdeploy.eth — Deploy your website to decentralized storage</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+
+<div class="container">
+  <nav>
+    <div class="logo">justdeploy<span>.eth</span></div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i data-lucide="sun"></i></button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-eyebrow">decentralized frontend deployment</div>
+    <h1>Make your frontend<br><em>unstoppable.</em></h1>
+    <p>Deploy your website to the Swarm decentralized network in minutes.<br>No servers, no subscriptions, no downtime. · <button class="swarm-toggle" id="swarmToggle">what is swarm? ↓</button></p>
+    <div class="swarm-accordion" id="swarmAccordion">
+      <div class="swarm-accordion-inner">
+        Swarm is a decentralized open source, peer-to-peer network. Uploaded files are split into small chunks and stored redundantly across nodes in the network — no single server, no single point of failure. You pay for storage by buying a postage stamp, which funds the nodes that keep your data available.
+        <a href="https://ethswarm.org" target="_blank">→ Learn more at ethswarm.org</a>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-dot" style="background:var(--accent)"></div> ~3 min to deploy</div>
+      <div class="stat"><div class="stat-dot" style="background:var(--green)"></div> No account needed</div>
+<div class="stat"><div class="stat-dot" style="background:var(--accent2)"></div> Pay for storage, not traffic</div>
+    </div>
+  </section>
+
+  <div class="section-label">pick your path</div>
+  <div class="section-label" style="margin-top:-12px; margin-bottom:20px; letter-spacing:0.06em; opacity:0.5">Browser &nbsp;→&nbsp; Desktop App &nbsp;→&nbsp; CLI</div>
+  <div class="skill-grid">
+    <div class="skill-card" data-level="beginner" onclick="showSteps('beginner')">
+      <span class="skill-icon"><i data-lucide="upload-cloud"></i></span>
+      <div class="skill-name">Easy</div>
+      <div class="skill-method">Browser</div>
+      <div class="skill-desc">I just want to upload my website.</div>
+    </div>
+    <div class="skill-card" data-level="intermediate" onclick="showSteps('intermediate')">
+      <span class="skill-icon"><i data-lucide="monitor"></i></span>
+      <div class="skill-name">Intermediate</div>
+      <div class="skill-method">Desktop App</div>
+      <div class="skill-desc">I prefer a GUI over the command line.</div>
+    </div>
+    <div class="skill-card" data-level="advanced" onclick="showSteps('advanced')">
+      <span class="skill-icon"><i data-lucide="terminal"></i></span>
+      <div class="skill-name">Advanced</div>
+      <div class="skill-method">CLI</div>
+      <div class="skill-desc">Give me the CLI. I run scripts for fun.</div>
+    </div>
+  </div>
+
+  <!-- BEGINNER STEPS -->
+  <div class="steps-section" id="steps-beginner">
+    <div class="tool-header">
+      <h2><i data-lucide="upload-cloud"></i> Deploy via Beeport</h2>
+      <span class="tool-badge badge-green">No install needed</span>
+    </div>
+    <div class="time-estimate"><i data-lucide="clock"></i> Total time: <span class="time-hl">~5 minutes</span> · wallet + small amount of any token on any chain required</div>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <div class="step-title">Connect your wallet</div>
+        <div class="step-desc">Open Beeport — no account or install required.</div>
+        <ul class="step-list">
+          <li>Go to <a href="https://beeport.ethswarm.org" target="_blank" style="color:var(--accent)">beeport.ethswarm.org</a> and click <strong>Connect Wallet</strong></li>
+          <li>Supports MetaMask, Brave, Phantom, Rainbow, Coinbase Wallet, and WalletConnect</li>
+        </ul>
+        <a class="step-action" href="https://beeport.ethswarm.org" target="_blank">→ Open Beeport</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <div class="step-title">Buy storage</div>
+        <div class="step-desc">Open the <strong>Buy</strong> tab and configure your storage.</div>
+        <ul class="step-list">
+          <li>Choose your chain: Gnosis, Ethereum, Base, Arbitrum, or Optimism</li>
+          <li>Choose your payment token — ETH, BZZ, USDC, or any ERC-20 token</li>
+          <li>Select a storage size and duration</li>
+          <li>Click <strong>Buy Storage</strong> and confirm the transaction in your wallet</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <div class="step-title">Upload your site folder</div>
+        <div class="step-desc">Switch to the <strong>Upload</strong> tab.</div>
+        <ul class="step-list">
+          <li>Check <strong>Multiple files in a folder (one hash)</strong></li>
+          <li>Click <strong>Select Folder</strong> and pick your build output folder</li>
+          <li>Make sure the folder contains an <code>index.html</code> at its root — that's the entry point Swarm serves</li>
+          <li>Click <strong>Upload</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <div class="step-title">Link to your ENS domain</div>
+        <div class="step-desc">In the <strong>History</strong> tab, find your upload and click the <strong>ENS</strong> button.</div>
+        <ul class="step-list">
+          <li>Select your <code>.eth</code> domain, click <strong>Set Content Hash</strong>, confirm in your wallet</li>
+          <li>Your site will be live at <code>yourname.eth.limo</code> and <code>yourname.bzz.link</code> within minutes</li>
+          <li>No ENS domain yet? Click <strong>Register Domain</strong> in the same dialog to get one directly in Beeport</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERMEDIATE STEPS -->
+  <div class="steps-section" id="steps-intermediate">
+    <div class="tool-header">
+      <h2><i data-lucide="monitor"></i> Deploy via Swarm Desktop</h2>
+      <span class="tool-badge badge-orange">Best for repeat deploys</span>
+    </div>
+    <div class="time-estimate"><i data-lucide="clock"></i> Total time: <span class="time-hl">~10 min first-time setup, ~2 min per deploy</span></div>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <div class="step-title">Download & install Swarm Desktop</div>
+        <div class="step-desc">Swarm Desktop runs a local Bee node with a full GUI — no terminal needed.</div>
+        <ul class="step-list">
+          <li>Download the installer for your OS and run it</li>
+          <li>Open the app after installation completes</li>
+          <li>Wait for <strong>Node OK</strong> in the bottom-left corner before continuing — this means your node is synced and ready</li>
+        </ul>
+        <a class="step-action" href="https://desktop.ethswarm.org" target="_blank">→ Download Swarm Desktop</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <div class="step-title">Fund your node</div>
+        <div class="step-desc">Go to <strong>Account → Wallet</strong> to find your node wallet address. You need funds to buy storage. Two options:</div>
+        <ul class="step-list">
+          <li><strong>Gift code</strong> — click <strong>Redeem gift code</strong> in the bottom-left, paste your code, click <strong>Proceed</strong></li>
+          <li><strong>Multichain top-up</strong> — copy your wallet address and top up from any chain and token, no bridging required</li>
+        </ul>
+        <a class="step-action" href="https://fund.ethswarm.org" target="_blank">→ Fund your node</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <div class="step-title">Buy a storage</div>
+        <div class="step-desc">Go to <strong>Account → <span class="tip" data-tip="You pay for storage by buying a postage stamp, which funds the nodes that keep your data available.">Stamps</span></strong> and click <strong>Buy New Postage Stamp Batch</strong>.</div>
+        <ul class="step-list">
+          <li>Enter a batch name (e.g. <code>my-website</code>)</li>
+          <li>Select a storage size: <strong>4 GB</strong>, <strong>32 GB</strong>, or <strong>256 GB</strong></li>
+          <li>Drag the <strong>Data persistence</strong> slider to set how long you need storage (1–365 days)</li>
+          <li>Review the estimated cost shown by the app, then click <strong>Buy New Stamp</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <div class="step-title">Create a feed</div>
+        <div class="step-desc">A feed gives your site a <strong>permanent URL</strong> that always points to the latest version — even after you redeploy. Go to <strong>Account → Feeds → Create New Feed</strong>.</div>
+        <ul class="step-list">
+          <li>Enter an identity name (e.g. <code>website</code>)</li>
+          <li>Set a password and confirm — the app generates a Topic automatically</li>
+          <li>Copy the <strong>Feed Manifest URL</strong> — this is your permanent link for ENS and sharing</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-content">
+        <div class="step-title">Upload your site</div>
+        <div class="step-desc">Go to <strong>Files → Add Website</strong> and select your build output folder.</div>
+        <ul class="step-list">
+          <li>Make sure the folder contains an <code>index.html</code> at its root — that's the entry point Swarm serves</li>
+          <li>Wait for the upload to complete</li>
+          <li>Click <strong>Update Feed</strong>, select your feed and stamp, then click <strong>Update Selected Feed</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">06</div>
+      <div class="step-content">
+        <div class="step-title">Share & update</div>
+        <div class="step-desc">Go to <strong>Account → Feeds</strong>, click your feed, and use <strong>View Feed Page</strong> to copy your permanent Feed Manifest URL.</div>
+        <ul class="step-list">
+          <li>Use this URL for your ENS <code>contenthash</code> record — it never changes, even when you redeploy</li>
+          <li>To update your site: re-upload the new build via <strong>Files → Add Website</strong>, then click <strong>Update Feed</strong> again</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADVANCED STEPS -->
+  <div class="steps-section" id="steps-advanced">
+    <div class="tool-header">
+      <h2><i data-lucide="terminal"></i> Deploy via Bee light node + swarm-cli</h2>
+      <span class="tool-badge badge-purple">CI/CD friendly</span>
+    </div>
+    <div class="time-estimate"><i data-lucide="clock"></i> Total time: <span class="time-hl">~10 min first-time setup, ~2 min per deploy</span></div>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <div class="step-title">Install a Bee light node</div>
+        <div class="step-desc">swarm-cli needs a running Bee node. Install it using the script (pick <code style="color:var(--accent);font-family:var(--font-mono)">curl</code> or <code style="color:var(--accent);font-family:var(--font-mono)">wget</code>):</div>
+        <div class="step-code"><span>$</span> curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.7.0 bash</div>
+        <div class="step-code" style="margin-top:8px"><span>$</span> wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.7.0 bash</div>
+        <div class="step-desc" style="margin-top:10px">Then start your node and verify it's running:</div>
+        <div class="step-code"><span>$</span> bee start --password YOUR_SECURE_PASSWORD --swap-enable --api-addr 127.0.0.1:1633 --blockchain-rpc-endpoint https://xdai.fairdatasociety.org</div>
+        <div class="step-code" style="margin-top:8px"><span>$</span> bee version</div>
+        <a class="step-action" href="https://docs.ethswarm.org/docs/bee/installation/quick-start" target="_blank">→ Full Quick Start Guide</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <div class="step-title">Fund your node</div>
+        <div class="step-desc">Your node runs at <code style="color:var(--accent);font-family:var(--font-mono)">localhost:1633</code> — fund its wallet to buy storage. Two options:</div>
+        <ul class="step-list">
+          <li><strong>Multichain top-up</strong> — top up from any chain and token, no bridging required</li>
+        </ul>
+        <a class="step-action" href="https://fund.ethswarm.org" target="_blank">→ Fund your node</a>
+        <ul class="step-list" style="margin-top:12px">
+          <li><strong>Gift code</strong> — redeem directly via swarm-cli:</li>
+        </ul>
+        <div class="step-code" style="margin-top:8px"><span>$</span> swarm-cli utility redeem &lt;gift code&gt;</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <div class="step-title">Install swarm-cli</div>
+        <div class="step-desc">Install the CLI tool globally via npm:</div>
+        <div class="step-code"><span>$</span> npm install --global @ethersphere/swarm-cli</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <div class="step-title">Buy storage</div>
+        <div class="step-desc">You need a <strong>mutable</strong> <span class="tip" data-tip="You pay for storage by buying a postage stamp, which funds the nodes that keep your data available.">stamp</span>. Pick your postage stamp size and duration — the command updates automatically.</div>
+
+        <div class="stamp-calc">
+          <div class="calc-group">
+            <div class="calc-label">Storage size</div>
+            <div class="calc-options" id="calc-size">
+              <button class="calc-btn active" data-depth="20">688 MB</button>
+              <button class="calc-btn" data-depth="21">2.6 GB</button>
+              <button class="calc-btn" data-depth="22">7.7 GB</button>
+              <button class="calc-btn" data-depth="23">19.9 GB</button>
+            </div>
+          </div>
+          <div class="calc-group">
+            <div class="calc-label">Duration</div>
+            <div class="calc-options" id="calc-duration">
+              <button class="calc-btn" data-days="1">1 day</button>
+              <button class="calc-btn" data-days="7">1 week</button>
+              <button class="calc-btn active" data-days="30">1 month</button>
+              <button class="calc-btn" data-days="90">3 months</button>
+              <button class="calc-btn" data-days="180">6 months</button>
+              <button class="calc-btn" data-days="365">1 year</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-code" id="stamp-cmd"><span>$</span> swarm-cli stamp buy --amount 40053139230 --depth 20 --immutable false
+</div>
+        <div class="step-desc" style="margin-top:10px">The CLI shows an estimate and asks you to confirm. Save the <strong>Stamp ID</strong> returned. To extend later:</div>
+        <div class="step-code"><span>$</span> swarm-cli stamp topup --stamp &lt;STAMP_ID&gt; --amount &lt;AMOUNT&gt;</div>
+        <div class="step-desc" style="margin-top:10px">On repeat deploys, check existing stamps first:</div>
+        <div class="step-code"><span>$</span> swarm-cli stamp list</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-content">
+        <div class="step-title">Create an identity</div>
+        <div class="step-desc">An identity is an Ethereum keypair used to sign feed updates — do this once.</div>
+        <div class="step-code"><span>$</span> swarm-cli identity create</div>
+        <ul class="step-list" style="margin-top:10px">
+          <li>You'll be prompted for a name (e.g. <code>main</code>) and a password</li>
+          <li>To list existing identities: <code>swarm-cli identity list</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">06</div>
+      <div class="step-content">
+        <div class="step-title">Upload your site to a feed</div>
+        <div class="step-desc">Upload your build folder. The <code style="color:var(--accent);font-family:var(--font-mono)">--topic-string</code> labels your feed — use the same value every time to update the same feed.</div>
+        <div class="step-code" style="display:block;line-height:1.8">
+          <span style="color:var(--muted)">$</span> swarm-cli feed upload ./dist \<br>
+          &nbsp;&nbsp;--stamp &lt;STAMP_ID&gt; \<br>
+          &nbsp;&nbsp;--identity &lt;NAME&gt; \<br>
+          &nbsp;&nbsp;--password &lt;PASSWORD&gt; \<br>
+          &nbsp;&nbsp;--topic-string "&lt;your-site-name&gt;"
+        </div>
+        <ul class="step-list" style="margin-top:10px">
+          <li><strong>URL</strong> — the content hash, changes with every upload</li>
+          <li><strong>Feed Manifest URL</strong> — permanent, always points to the latest version</li>
+          <li>Use the <strong>Feed Manifest URL</strong> for your ENS <code>contenthash</code> record — it never changes, even when you redeploy</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">07</div>
+      <div class="step-content">
+        <div class="step-title">Update & verify</div>
+        <div class="step-desc">To redeploy, run the same feed upload command — the Feed Manifest URL stays the same automatically.</div>
+        <ul class="step-list">
+          <li>Always use the same <code>--identity</code>, <code>--password</code>, and <code>--topic-string</code> — different values create a new feed</li>
+          <li>To confirm the feed points to the latest version:</li>
+        </ul>
+        <div class="step-code" style="display:block;line-height:1.8;margin-top:8px">
+          <span style="color:var(--muted)">$</span> swarm-cli feed print \<br>
+          &nbsp;&nbsp;--identity &lt;NAME&gt; \<br>
+          &nbsp;&nbsp;--topic-string "&lt;your-site-name&gt;"
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Built to make decentralized hosting accessible to <span class="footer-everyone">everyone.</span><br>
+    Hosted on <a href="https://ethswarm.org" target="_blank">Swarm</a>.
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>lucide.createIcons();</script>
+</body>
+</html>
