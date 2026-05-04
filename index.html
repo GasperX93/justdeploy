@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>justdeploy.eth — Decentralize your website</title>
+<title>justdeploy.eth — Decentralized frontend deployment</title>
 
 <!-- Open Graph -->
-<meta property="og:title" content="justdeploy.eth — Decentralize your website">
+<meta property="og:title" content="justdeploy.eth — Decentralized frontend deployment">
 <meta property="og:description" content="Deploy your website to the Swarm decentralized network in minutes. No servers, no subscriptions, no downtime.">
 <meta property="og:image" content="https://justdeploy.eth.limo/assets/OG.png">
 <meta property="og:url" content="https://justdeploy.eth.limo">
@@ -14,7 +14,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="justdeploy.eth — Decentralize your website">
+<meta name="twitter:title" content="justdeploy.eth — Decentralized frontend deployment">
 <meta name="twitter:description" content="Deploy your website to the Swarm decentralized network in minutes. No servers, no subscriptions, no downtime.">
 <meta name="twitter:image" content="https://justdeploy.eth.limo/assets/OG.png">
 
@@ -35,8 +35,8 @@
   </nav>
 
   <section class="hero">
-    <div class="hero-eyebrow">decentralized frontend deployment</div>
-    <h1>Make your frontend<br><em>unstoppable.</em></h1>
+    <div class="hero-eyebrow">LEAVE THE CLOUD. JOIN THE SWARM.</div>
+    <h1>Decentralized frontend<br><em>deployment</em></h1>
     <p>Deploy your website to the Swarm decentralized network in minutes.<br>No servers, no subscriptions, no downtime. · <button class="swarm-toggle" id="swarmToggle">what is swarm? ↓</button></p>
     <div class="swarm-accordion" id="swarmAccordion">
       <div class="swarm-accordion-inner">
@@ -257,13 +257,11 @@
     <div class="step">
       <div class="step-num">01</div>
       <div class="step-content">
-        <div class="step-title">Install a Bee light node</div>
-        <div class="step-desc">swarm-cli needs a running Bee node. Install it using the script (pick <code style="color:var(--accent);font-family:var(--font-mono)">curl</code> or <code style="color:var(--accent);font-family:var(--font-mono)">wget</code>):</div>
-        <div class="step-code"><span>$</span> curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.7.0 bash</div>
-        <div class="step-code" style="margin-top:8px"><span>$</span> wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.7.0 bash</div>
-        <div class="step-desc" style="margin-top:10px">Then start your node and verify it's running:</div>
-        <div class="step-code"><span>$</span> bee start --password YOUR_SECURE_PASSWORD --swap-enable --api-addr 127.0.0.1:1633 --blockchain-rpc-endpoint https://xdai.fairdatasociety.org</div>
-        <div class="step-code" style="margin-top:8px"><span>$</span> bee version</div>
+        <div class="step-title">Install swarm-cli & set up a Bee light node</div>
+        <div class="step-desc">Install the CLI tool globally via npm:</div>
+        <div class="step-code"><span>$</span> npm install --global @ethersphere/swarm-cli</div>
+        <div class="step-desc" style="margin-top:10px">Then run <code style="color:var(--accent);font-family:var(--font-mono)">quickstart</code> — it downloads the Bee node and creates the config file for you:</div>
+        <div class="step-code"><span>$</span> swarm-cli quickstart</div>
         <a class="step-action" href="https://docs.ethswarm.org/docs/bee/installation/quick-start" target="_blank">→ Full Quick Start Guide</a>
       </div>
     </div>
@@ -272,7 +270,9 @@
       <div class="step-num">02</div>
       <div class="step-content">
         <div class="step-title">Fund your node</div>
-        <div class="step-desc">Your node runs at <code style="color:var(--accent);font-family:var(--font-mono)">localhost:1633</code> — fund its wallet to buy storage. Two options:</div>
+        <div class="step-desc">Your node runs at <code style="color:var(--accent);font-family:var(--font-mono)">http://localhost:1633</code> — fund its wallet to buy storage. First, get your wallet address:</div>
+        <div class="step-code"><span>$</span> curl -s http://localhost:1633/addresses | jq .ethereum</div>
+        <div class="step-desc" style="margin-top:12px">Two ways to fund:</div>
         <ul class="step-list">
           <li><strong>Multichain top-up</strong> — top up from any chain and token, no bridging required</li>
         </ul>
@@ -287,54 +287,50 @@
     <div class="step">
       <div class="step-num">03</div>
       <div class="step-content">
-        <div class="step-title">Install swarm-cli</div>
-        <div class="step-desc">Install the CLI tool globally via npm:</div>
-        <div class="step-code"><span>$</span> npm install --global @ethersphere/swarm-cli</div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">04</div>
-      <div class="step-content">
         <div class="step-title">Buy storage</div>
-        <div class="step-desc">You need a <strong>mutable</strong> <span class="tip" data-tip="You pay for storage by buying a postage stamp, which funds the nodes that keep your data available.">stamp</span>. Pick your postage stamp size and duration — the command updates automatically.</div>
+        <div class="step-desc">Pick your <span class="tip" data-tip="You pay for storage by buying a postage stamp, which funds the nodes that keep your data available.">postage stamp</span> capacity and time-to-live — the command updates automatically. <code style="color:var(--accent);font-family:var(--font-mono)">stamp create</code> accepts human units like <code style="color:var(--accent);font-family:var(--font-mono)">1GB</code> for capacity and <code style="color:var(--accent);font-family:var(--font-mono)">1d</code> / <code style="color:var(--accent);font-family:var(--font-mono)">1w</code> / <code style="color:var(--accent);font-family:var(--font-mono)">1month</code> for TTL. Default is <strong>immutable</strong> (recommended for websites).</div>
 
         <div class="stamp-calc">
           <div class="calc-group">
-            <div class="calc-label">Storage size</div>
+            <div class="calc-label">Capacity</div>
             <div class="calc-options" id="calc-size">
-              <button class="calc-btn active" data-depth="20">688 MB</button>
+              <button class="calc-btn" data-depth="19">110 MB</button>
+              <button class="calc-btn active" data-depth="20">680 MB</button>
               <button class="calc-btn" data-depth="21">2.6 GB</button>
               <button class="calc-btn" data-depth="22">7.7 GB</button>
-              <button class="calc-btn" data-depth="23">19.9 GB</button>
             </div>
           </div>
           <div class="calc-group">
-            <div class="calc-label">Duration</div>
+            <div class="calc-label">TTL</div>
             <div class="calc-options" id="calc-duration">
-              <button class="calc-btn" data-days="1">1 day</button>
-              <button class="calc-btn" data-days="7">1 week</button>
-              <button class="calc-btn active" data-days="30">1 month</button>
-              <button class="calc-btn" data-days="90">3 months</button>
-              <button class="calc-btn" data-days="180">6 months</button>
-              <button class="calc-btn" data-days="365">1 year</button>
+              <button class="calc-btn" data-months="1">1 month</button>
+              <button class="calc-btn active" data-months="3">3 months</button>
+              <button class="calc-btn" data-months="6">6 months</button>
+              <button class="calc-btn" data-months="12">1 year</button>
+            </div>
+          </div>
+          <div class="calc-group">
+            <div class="calc-label">Type</div>
+            <div class="calc-options" id="calc-type">
+              <button class="calc-btn active" data-immutable="true">Immutable</button>
+              <button class="calc-btn" data-immutable="false">Mutable</button>
             </div>
           </div>
         </div>
 
-        <div class="step-code" id="stamp-cmd"><span>$</span> swarm-cli stamp buy --amount 40053139230 --depth 20 --immutable false
-</div>
+        <div class="step-code" id="stamp-cmd"><span>$</span> <span class="stamp-cmd-text">swarm-cli stamp create --capacity 680MB --ttl 3months</span></div>
+        <div class="stamp-cost" id="stamp-cost">Fetching live price…</div>
         <div class="step-desc" style="margin-top:10px">The CLI shows an estimate and asks you to confirm. Save the <strong>Stamp ID</strong> returned.</div>
         <div class="step-note">⚠ Storage expires when your stamp runs out — if it hits zero, your site will be taken offline.</div>
-        <div class="step-desc" style="margin-top:10px">Extend postage stamp before it runs out:</div>
-        <div class="step-code" style="margin-top:8px"><span>$</span> swarm-cli stamp topup --stamp &lt;STAMP_ID&gt; --amount &lt;AMOUNT&gt;</div>
+        <div class="step-desc" style="margin-top:10px">Extend size or TTL of an existing stamp (interactive — pick the stamp, then choose Size or Duration):</div>
+        <div class="step-code" style="margin-top:8px"><span>$</span> swarm-cli stamp extend</div>
         <div class="step-desc" style="margin-top:10px">On repeat deploys, check existing stamps first:</div>
         <div class="step-code"><span>$</span> swarm-cli stamp list</div>
       </div>
     </div>
 
     <div class="step">
-      <div class="step-num">05</div>
+      <div class="step-num">04</div>
       <div class="step-content">
         <div class="step-title">Create an identity</div>
         <div class="step-desc">An identity is an Ethereum keypair used to sign feed updates — do this once.</div>
@@ -348,7 +344,7 @@
     </div>
 
     <div class="step">
-      <div class="step-num">06</div>
+      <div class="step-num">05</div>
       <div class="step-content">
         <div class="step-title">Upload your site to a feed</div>
         <div class="step-desc">Upload your build folder. The <code style="color:var(--accent);font-family:var(--font-mono)">--topic-string</code> labels your feed — use the same value every time to update the same feed.</div>
@@ -367,7 +363,7 @@
     </div>
 
     <div class="step">
-      <div class="step-num">07</div>
+      <div class="step-num">06</div>
       <div class="step-content">
         <div class="step-title">Link your ENS domain</div>
         <div class="step-desc">Set your Feed Manifest URL as the content hash on your <code style="color:var(--accent);font-family:var(--font-mono)">.eth</code> domain.</div>
@@ -386,7 +382,7 @@
     </div>
 
     <div class="step">
-      <div class="step-num">08</div>
+      <div class="step-num">07</div>
       <div class="step-content">
         <div class="step-title">Update & verify</div>
         <div class="step-desc">To redeploy, run the same feed upload command — the Feed Manifest URL stays the same automatically.</div>

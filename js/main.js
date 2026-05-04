@@ -44,22 +44,63 @@ themeToggle.addEventListener('click', () => {
   setTheme(current === 'dark' ? 'light' : 'dark');
 });
 
-// Stamp calculator
-// Effective volumes from https://docs.ethswarm.org/docs/concepts/incentives/postage-stamps/#effective-utilisation-table
-// Unencrypted / NONE erasure coding, <0.1% failure rate
-const EFFECTIVE_SIZE = { 17:'44.7 kB', 18:'6.7 MB', 19:'112 MB', 20:'688 MB', 21:'2.6 GB', 22:'7.7 GB', 23:'19.9 GB', 24:'47.1 GB', 25:'105.5 GB' };
-const AMOUNT_PER_DAY = 1335104641;
+// Stamp calculator — mirrors Nook's calcStampCost logic (ui/src/api/bee.ts)
+// Effective (utilised) capacities from Swarm docs — accounts for bucket overflow
+const EFFECTIVE_SIZE = { 19:'110 MB', 20:'680 MB', 21:'2.6 GB', 22:'7.7 GB' };
+const SIZE_HUMAN = { 19:'110MB', 20:'680MB', 21:'2.6GB', 22:'7.7GB' };
+const TTL_HUMAN = { 1:'1month', 3:'3months', 6:'6months', 12:'1y' };
+const BLOCKS_PER_MONTH = 518400n; // Gnosis chain ~5s blocks
+const PLUR_PER_BZZ = 10n ** 16n;
+// Network price in PLUR per chunk per block
+const FALLBACK_PRICE = 24000n; // estimate — update periodically
+let networkPrice = FALLBACK_PRICE;
+let priceIsLive = false;
 let calcDepth = 20;
-let calcDays = 30;
+let calcMonths = 3;
+let calcImmutable = true;
 
 function depthToSize(depth) {
   return EFFECTIVE_SIZE[depth] || '—';
 }
 
+// Try fetching live price from local Bee node (advanced users run one)
+async function fetchNetworkPrice() {
+  try {
+    const res = await fetch('http://localhost:1633/chainstate');
+    const data = await res.json();
+    if (data.currentPrice) {
+      networkPrice = BigInt(data.currentPrice);
+      priceIsLive = true;
+    }
+  } catch (e) { /* use fallback */ }
+  updateStampCmd();
+}
+
+fetchNetworkPrice();
+
+// Same formula as Nook: amount = price * blocks, bzzCost = amount * 2^depth
+function calcStampCost(depth, months, price) {
+  const durationBlocks = BigInt(months) * BLOCKS_PER_MONTH;
+  const amount = price * durationBlocks;
+  const totalPlur = amount * (1n << BigInt(depth));
+  const whole = totalPlur / PLUR_PER_BZZ;
+  const frac = ((totalPlur % PLUR_PER_BZZ) * 10000n) / PLUR_PER_BZZ;
+  const bzzCost = `${whole}.${String(frac).padStart(4, '0')}`;
+  return { amount: amount.toString(), bzzCost };
+}
+
 function updateStampCmd() {
-  const amount = Math.round(AMOUNT_PER_DAY * calcDays);
   const el = document.getElementById('stamp-cmd');
-  if (el) el.innerHTML = `<span>$</span> swarm-cli stamp buy --amount ${amount} --depth ${calcDepth} --immutable false`;
+  const costEl = document.getElementById('stamp-cost');
+  if (!el) return;
+
+  const { bzzCost } = calcStampCost(calcDepth, calcMonths, networkPrice);
+  const immutableFlag = calcImmutable ? '' : ' --immutable false';
+  const textEl = el.querySelector('.stamp-cmd-text');
+  if (textEl) textEl.textContent = `swarm-cli stamp create --capacity ${SIZE_HUMAN[calcDepth]} --ttl ${TTL_HUMAN[calcMonths]}${immutableFlag}`;
+  const prefix = priceIsLive ? 'Cost' : 'Estimated cost';
+  const approx = priceIsLive ? '' : '~';
+  if (costEl) costEl.innerHTML = `${prefix}: <strong>${approx}${bzzCost} BZZ</strong>`;
 }
 
 document.querySelectorAll('#calc-size .calc-btn').forEach(btn => {
@@ -76,7 +117,16 @@ document.querySelectorAll('#calc-duration .calc-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('#calc-duration .calc-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    calcDays = parseInt(btn.dataset.days);
+    calcMonths = parseInt(btn.dataset.months);
+    updateStampCmd();
+  });
+});
+
+document.querySelectorAll('#calc-type .calc-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#calc-type .calc-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    calcImmutable = btn.dataset.immutable === 'true';
     updateStampCmd();
   });
 });

@@ -430,6 +430,16 @@ nav {
   color: var(--text);
 }
 
+.stamp-cost {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+.stamp-cost strong {
+  color: var(--accent);
+}
+
 /* COMPARISON TABLE */
 .compare-wrap {
   margin-bottom: 56px;
