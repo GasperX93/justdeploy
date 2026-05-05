@@ -86,7 +86,7 @@
       <div class="step-num">01</div>
       <div class="step-content">
         <div class="step-title">Connect your wallet</div>
-        <div class="step-desc">Open Beeport — no account or install required.</div>
+        <div class="step-desc">Open Beeport — no install required.</div>
         <ul class="step-list">
           <li>Go to <a href="https://beeport.ethswarm.org" target="_blank" style="color:var(--accent)">beeport.ethswarm.org</a> and click <strong>Connect Wallet</strong></li>
           <li>Supports MetaMask, Brave, Phantom, Rainbow, Coinbase Wallet, and WalletConnect</li>
@@ -126,6 +126,19 @@
 
     <div class="step">
       <div class="step-num">04</div>
+      <div class="step-content">
+        <div class="step-title">Access your site (optional, via hash)</div>
+        <div class="step-desc">After upload, Beeport shows an <strong>Upload Successful!</strong> modal with an <strong>Open link</strong> button. Here's what to expect depending on how you open it:</div>
+        <ul class="step-list">
+          <li><strong>Swarm Gateway</strong> — the default link opens on the official Swarm Gateway, which blocks unreviewed sites to prevent phishing. You'll see a <em>Forbidden</em> message — this is normal. Sites can be submitted for approval to get unblocked.</li>
+          <li><strong>Alternative gateway</strong> — use <code>https://bzz.limo/bzz/&lt;hash&gt;/</code> to view your site immediately without approval</li>
+          <li><strong>ENS domain</strong> — link your site to an ENS name (next step) and it will be accessible via <code>yourname.eth.limo</code> and <code>yourname.bzz.link</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">05</div>
       <div class="step-content">
         <div class="step-title">Link to your ENS domain</div>
         <div class="step-desc">In the <strong>History</strong> tab, find your upload and click the <strong>ENS</strong> button.</div>
@@ -169,7 +182,7 @@
           <li><strong>Gift code</strong> — click <strong>Redeem gift code</strong> in the bottom-left, paste your code, click <strong>Proceed</strong></li>
           <li><strong>Multichain top-up</strong> — copy your wallet address and top up from any chain and token, no bridging required</li>
         </ul>
-        <a class="step-action" href="https://fund.ethswarm.org" target="_blank">→ Fund your node</a>
+        <a class="step-action" href="https://fund.bzz.limo" target="_blank">→ Fund your node</a>
       </div>
     </div>
 
@@ -270,14 +283,13 @@
       <div class="step-num">02</div>
       <div class="step-content">
         <div class="step-title">Fund your node</div>
-        <div class="step-desc">Your node runs at <code style="color:var(--accent);font-family:var(--font-mono)">http://localhost:1633</code> — fund its wallet to buy storage. First, get your wallet address:</div>
-        <div class="step-code"><span>$</span> curl -s http://localhost:1633/addresses | jq .ethereum</div>
-        <div class="step-desc" style="margin-top:12px">Two ways to fund:</div>
+        <div class="step-desc"><code style="color:var(--accent);font-family:var(--font-mono)">quickstart</code> prints the command to start the Bee node. Once the node is running, it will print that it requires funds and display its wallet address. Copy that address — then fund it using one of these options:</div>
         <ul class="step-list">
-          <li><strong>Multichain top-up</strong> — top up from any chain and token, no bridging required</li>
+          <li><strong>Multichain funding</strong> — send funds from any chain and token, no bridging required</li>
         </ul>
-        <a class="step-action" href="https://fund.ethswarm.org" target="_blank">→ Fund your node</a>
+        <a class="step-action" href="https://fund.bzz.limo" target="_blank">→ Fund your node</a>
         <ul class="step-list" style="margin-top:12px">
+          <li><strong>Transfer from wallet</strong> — if you already have xDAI and xBZZ in MetaMask or another wallet, simply send them to the node address</li>
           <li><strong>Gift code</strong> — redeem directly via swarm-cli:</li>
         </ul>
         <div class="step-code" style="margin-top:8px"><span>$</span> swarm-cli utility redeem &lt;gift code&gt;</div>
@@ -320,10 +332,12 @@
 
         <div class="step-code" id="stamp-cmd"><span>$</span> <span class="stamp-cmd-text">swarm-cli stamp create --capacity 680MB --ttl 3months</span></div>
         <div class="stamp-cost" id="stamp-cost">Fetching live price…</div>
-        <div class="step-desc" style="margin-top:10px">The CLI shows an estimate and asks you to confirm. Save the <strong>Stamp ID</strong> returned.</div>
+        <div class="step-desc" style="margin-top:10px">The CLI shows an estimate and asks you to confirm.</div>
         <div class="step-note">⚠ Storage expires when your stamp runs out — if it hits zero, your site will be taken offline.</div>
-        <div class="step-desc" style="margin-top:10px">Extend size or TTL of an existing stamp (interactive — pick the stamp, then choose Size or Duration):</div>
-        <div class="step-code" style="margin-top:8px"><span>$</span> swarm-cli stamp extend</div>
+        <div class="step-desc" style="margin-top:10px">To increase TTL of an existing stamp:</div>
+        <div class="step-code" style="margin-top:8px"><span>$</span> swarm-cli stamp topup</div>
+        <div class="step-desc" style="margin-top:10px">To increase capacity of an existing stamp:</div>
+        <div class="step-code" style="margin-top:8px"><span>$</span> swarm-cli stamp dilute</div>
         <div class="step-desc" style="margin-top:10px">On repeat deploys, check existing stamps first:</div>
         <div class="step-code"><span>$</span> swarm-cli stamp list</div>
       </div>
@@ -333,10 +347,9 @@
       <div class="step-num">04</div>
       <div class="step-content">
         <div class="step-title">Create an identity</div>
-        <div class="step-desc">An identity is an Ethereum keypair used to sign feed updates — do this once.</div>
-        <div class="step-code"><span>$</span> swarm-cli identity create</div>
+        <div class="step-desc">An identity is an Ethereum keypair used to sign feed updates — do this once. The default name is <code style="color:var(--accent);font-family:var(--font-mono)">main</code> if you don't specify one.</div>
+        <div class="step-code"><span>$</span> swarm-cli identity create --only-keypair</div>
         <ul class="step-list" style="margin-top:10px">
-          <li>You'll be prompted for a name (e.g. <code>main</code>) and a password</li>
           <li>To list existing identities:</li>
         </ul>
         <div class="step-code" style="margin-top:8px"><span>$</span> swarm-cli identity list</div>
@@ -347,14 +360,8 @@
       <div class="step-num">05</div>
       <div class="step-content">
         <div class="step-title">Upload your site to a feed</div>
-        <div class="step-desc">Upload your build folder. The <code style="color:var(--accent);font-family:var(--font-mono)">--topic-string</code> labels your feed — use the same value every time to update the same feed.</div>
-        <div class="step-code" style="display:block;line-height:1.8">
-          <span style="color:var(--muted)">$</span> swarm-cli feed upload ./dist \<br>
-          &nbsp;&nbsp;--stamp &lt;STAMP_ID&gt; \<br>
-          &nbsp;&nbsp;--identity &lt;NAME&gt; \<br>
-          &nbsp;&nbsp;--password &lt;PASSWORD&gt; \<br>
-          &nbsp;&nbsp;--topic-string "&lt;your-site-name&gt;"
-        </div>
+        <div class="step-desc">Upload your build folder — the CLI will interactively prompt for a stamp and identity.</div>
+        <div class="step-code"><span>$</span> swarm-cli feed upload ./dist</div>
         <ul class="step-list" style="margin-top:10px">
           <li><strong>URL</strong> — the content hash, changes with every upload</li>
           <li><strong>Feed Manifest URL</strong> — permanent, always points to the latest version — copy this for the next step</li>
@@ -385,16 +392,11 @@
       <div class="step-num">07</div>
       <div class="step-content">
         <div class="step-title">Update & verify</div>
-        <div class="step-desc">To redeploy, run the same feed upload command — the Feed Manifest URL stays the same automatically.</div>
+        <div class="step-desc">To redeploy, run the same command — pick the same identity from the prompt and the Feed Manifest URL stays the same automatically.</div>
         <ul class="step-list">
-          <li>Always use the same <code>--identity</code>, <code>--password</code>, and <code>--topic-string</code> — different values create a new feed</li>
           <li>To confirm the feed points to the latest version:</li>
         </ul>
-        <div class="step-code" style="display:block;line-height:1.8;margin-top:8px">
-          <span style="color:var(--muted)">$</span> swarm-cli feed print \<br>
-          &nbsp;&nbsp;--identity &lt;NAME&gt; \<br>
-          &nbsp;&nbsp;--topic-string "&lt;your-site-name&gt;"
-        </div>
+        <div class="step-code" style="margin-top:8px"><span>$</span> swarm-cli feed print --identity main</div>
       </div>
     </div>
   </div>
