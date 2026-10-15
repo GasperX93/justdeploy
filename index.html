@@ -162,14 +162,8 @@
     <div class="step">
       <div class="step-num">01</div>
       <div class="step-content">
-        <div class="step-title">Download & install Nook</div>
-        <div class="step-desc">Nook is a desktop app that runs your own Swarm node in the background and opens its dashboard in your browser — no terminal needed.</div>
-        <ul class="step-list">
-          <li>Download the installer for your OS (macOS, Windows or Linux) and run it</li>
-          <li>Open Nook — the first time it downloads and starts its node, which takes about a minute</li>
-          <li>Signing in with <strong>Swarm ID</strong> is optional — you can skip it, publishing works without it</li>
-        </ul>
-        <div class="step-note">⚠ Nook runs its own node. If another Bee node is already running on your computer (a <code>bee</code> command, a Docker container or another Swarm app), Nook shows a screen saying so — stop the other node and press <strong>Try again</strong>.</div>
+        <div class="step-title">Install Nook</div>
+        <div class="step-desc">Download it, open it and follow the setup. Nook runs its own Swarm node and walks you through the rest.</div>
         <a class="step-action" href="https://github.com/GasperX93/nook/releases/latest" target="_blank">→ Download Nook</a>
       </div>
     </div>
@@ -177,71 +171,37 @@
     <div class="step">
       <div class="step-num">02</div>
       <div class="step-content">
-        <div class="step-title">Fund your node</div>
-        <div class="step-desc">Your node has its own wallet on Gnosis Chain, under <strong>Account → Wallet</strong>. You need <span class="tip" data-tip="xDAI pays tiny network fees. xBZZ pays for storage and bandwidth.">xDAI and xBZZ</span> to publish. Three ways to add them:</div>
-        <ul class="step-list">
-          <li><strong>Add funds</strong> — pay from almost any chain and token, no bridging required</li>
-          <li><strong>Gift code</strong> — redeem a gift code</li>
-          <li><strong>Send directly</strong> — send xDAI and xBZZ to your node wallet address, on Gnosis Chain only</li>
-        </ul>
-        <div class="step-desc">How much: a little xDAI for fees, and xBZZ for your site's storage <strong>plus about 3 xBZZ</strong> that Nook sets aside by itself — a small reserved space for identity and messages, and a deposit for bandwidth. The publish screen shows the exact cost of your site before you pay.</div>
-        <div class="step-desc">Once funds arrive, your node connects to the network — this usually takes 1–5 minutes.</div>
+        <div class="step-title">Add funds</div>
+        <div class="step-desc">Setup asks for <span class="tip" data-tip="xDAI pays network fees. xBZZ pays for storage.">xDAI and xBZZ</span>. Pay from almost any chain, redeem a gift code, or send them to your node wallet on Gnosis.</div>
+        <div class="step-note">Add about 3 xBZZ on top of your site's cost — Nook keeps that for messaging and bandwidth.</div>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">03</div>
       <div class="step-content">
-        <div class="step-title">Publish your site</div>
-        <div class="step-desc">Click <strong>Publish website</strong> in the sidebar and drop your site's build folder on <strong>Drop your website folder here</strong>.</div>
+        <div class="step-title">Publish</div>
+        <div class="step-desc"><strong>Publish website</strong> → drop your build folder → pick size and time → <strong>Publish</strong>.</div>
         <ul class="step-list">
-          <li>The folder needs an <code>index.html</code> at its root — Nook finds it and shows it as the <strong>Index file</strong></li>
-          <li>Pick a <span class="tip" data-tip="You pay for storage upfront, which funds the nodes that keep your data available.">Storage size</span> and <strong>How long</strong> the site should stay up — <strong>Estimated cost</strong> and <strong>Your balance</strong> are shown side by side</li>
-          <li>Keep <strong>Permanent address</strong> on — one link that always points to your latest version, even after you update the site</li>
-          <li>Click <strong>Publish</strong> — progress shows in the sidebar, and the bell says <strong>Website published</strong> when it's done</li>
+          <li>Keep <strong>Permanent address</strong> on: one link that stays the same when you update</li>
+          <li>Turn on <strong>Auto-extend</strong> in Drive so the site doesn't expire</li>
         </ul>
-        <div class="step-note">⚠ Your site stays online only as long as its storage is paid for. To keep it up, open the site in <strong>Drive</strong> and extend it, or turn on <strong>Auto-extend</strong> (Nook has to be running for it to extend).</div>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">04</div>
       <div class="step-content">
-        <div class="step-title">Open your site</div>
-        <div class="step-desc">When publishing finishes, Nook shows your site's addresses with three buttons:</div>
-        <ul class="step-list">
-          <li><strong>Copy live link</strong> — the permanent address, to share or to use for ENS</li>
-          <li><strong>Preview locally</strong> — opens the site through your own node, right away</li>
-          <li><strong>Open on gateway</strong> — opens it on the public Swarm Gateway, which blocks unreviewed sites to prevent phishing. A <em>Forbidden</em> message there is normal; use <code>https://bzz.limo/bzz/&lt;address&gt;/</code> or your ENS name instead</li>
-        </ul>
+        <div class="step-title">Link your ENS name</div>
+        <div class="step-desc">Click <strong>Link ENS domain</strong>, pick your <code>.eth</code> name and confirm in the wallet that owns it. Your site is live at <code>yourname.eth.limo</code> within minutes.</div>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">05</div>
       <div class="step-content">
-        <div class="step-title">Link your ENS domain</div>
-        <div class="step-desc">Click <strong>Link ENS domain</strong> after publishing — or later, with <strong>Set ENS domain</strong> on the site's row in <strong>Drive</strong>. Nook sets your site's permanent address as the content hash of a <code>.eth</code> name you own.</div>
-        <ul class="step-list">
-          <li>Connect the Ethereum wallet that owns the name</li>
-          <li>Pick your domain and confirm the transaction — it costs a small fee in ETH on Ethereum</li>
-          <li>Your site will be live at <code>yourname.eth.limo</code> and <code>yourname.bzz.link</code> within minutes <span class="tip" data-tip="eth.limo and bzz.link are centralized gateways. Your site can also be served directly via its Swarm hash for anyone running a Bee node."></span></li>
-        </ul>
-        <div class="step-desc" style="margin-top:8px">Prefer to set it yourself? Copy the permanent address with <strong>Copy live link</strong> and paste it into the <strong>Content Hash</strong> field on <a href="https://app.ens.domains" target="_blank" style="color:var(--accent)">app.ens.domains</a>:</div>
-        <div class="step-code"><span style="color:var(--muted)">bzz://</span>&lt;your-permanent-address&gt;</div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">06</div>
-      <div class="step-content">
-        <div class="step-title">Update your site</div>
-        <div class="step-desc">Re-publish whenever your site changes — the permanent address stays the same, so your ENS record never needs updating.</div>
-        <ul class="step-list">
-          <li>Go to <strong>Drive</strong> and find your site</li>
-          <li>Click <strong>Update content</strong> and drop your new build folder</li>
-          <li>The site switches to the new version once it's stored on the network</li>
-        </ul>
+        <div class="step-title">Update</div>
+        <div class="step-desc"><strong>Drive</strong> → your site → <strong>Update content</strong> → drop the new build. Same address, nothing to change on ENS.</div>
       </div>
     </div>
   </div>
