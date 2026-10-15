@@ -9,7 +9,7 @@ Walks users through three deployment paths based on their comfort level:
 | Path | Tool | Best for |
 |---|---|---|
 | **Easy** | [Beeport](https://beeport.ethswarm.org) | Browser-only, wallet required, no install |
-| **Intermediate** | [Swarm Desktop](https://desktop.ethswarm.org) | GUI app, local node, repeat deploys |
+| **Intermediate** | [Nook](https://github.com/GasperX93/nook) | GUI app, local node, repeat deploys |
 | **Advanced** | [Bee](https://github.com/ethersphere/bee) + [swarm-cli](https://github.com/ethersphere/swarm-cli) | CLI, scriptable, CI/CD |
 
 
@@ -43,7 +43,7 @@ Defined as CSS custom properties in `:root` (dark) and `[data-theme="light"]`:
 ## External links
 
 - Upload app: https://beeport.ethswarm.org
-- Desktop app: https://desktop.ethswarm.org
+- Desktop app (Nook): https://github.com/GasperX93/nook/releases/latest
 - Node funding: https://fund.ethswarm.org
 - Swarm docs: https://docs.ethswarm.org
 - Main site: https://ethswarm.org

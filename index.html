@@ -154,7 +154,7 @@
   <!-- INTERMEDIATE STEPS -->
   <div class="steps-section" id="steps-intermediate">
     <div class="tool-header">
-      <h2><i data-lucide="monitor"></i> Deploy via Swarm Desktop</h2>
+      <h2><i data-lucide="monitor"></i> Deploy via Nook</h2>
       <span class="tool-badge badge-orange">Best for repeat deploys</span>
     </div>
     <div class="time-estimate"><i data-lucide="clock"></i> Total time: <span class="time-hl">~10 min first-time setup, ~2 min per deploy</span></div>
@@ -162,14 +162,15 @@
     <div class="step">
       <div class="step-num">01</div>
       <div class="step-content">
-        <div class="step-title">Download & install Swarm Desktop</div>
-        <div class="step-desc">Swarm Desktop runs a local Bee node with a full GUI — no terminal needed.</div>
+        <div class="step-title">Download & install Nook</div>
+        <div class="step-desc">Nook is a desktop app that runs your own Swarm node in the background and opens its dashboard in your browser — no terminal needed.</div>
         <ul class="step-list">
-          <li>Download the installer for your OS and run it</li>
-          <li>Open the app after installation completes</li>
-          <li>Wait for <strong>Node OK</strong> in the bottom-left corner before continuing — this means your node is synced and ready</li>
+          <li>Download the installer for your OS (macOS, Windows or Linux) and run it</li>
+          <li>Open Nook — it downloads and starts its node, which takes a few seconds</li>
+          <li>Signing in with <strong>Swarm ID</strong> is optional — you can skip it, publishing works without it</li>
         </ul>
-        <a class="step-action" href="https://desktop.ethswarm.org" target="_blank">→ Download Swarm Desktop</a>
+        <div class="step-note">⚠ Nook runs its own node. If another Bee node is already running on your computer (a <code>bee</code> command, Docker container or another Swarm app), stop it first.</div>
+        <a class="step-action" href="https://github.com/GasperX93/nook/releases/latest" target="_blank">→ Download Nook</a>
       </div>
     </div>
 
@@ -177,87 +178,60 @@
       <div class="step-num">02</div>
       <div class="step-content">
         <div class="step-title">Fund your node</div>
-        <div class="step-desc">Go to <strong>Account → Wallet</strong> to find your node wallet address. You need funds to buy storage. Two options:</div>
+        <div class="step-desc">Your node has its own wallet on Gnosis Chain, under <strong>Account → Wallet</strong>. You need <span class="tip" data-tip="xDAI pays tiny network fees. xBZZ pays for storage and bandwidth.">xDAI and xBZZ</span> to publish. Three options:</div>
         <ul class="step-list">
-          <li><strong>Gift code</strong> — click <strong>Redeem gift code</strong> in the bottom-left, paste your code, click <strong>Proceed</strong></li>
-          <li><strong>Multichain top-up</strong> — copy your wallet address and top up from any chain and token, no bridging required</li>
+          <li><strong>Add funds</strong> — pay from almost any chain and token, no bridging required</li>
+          <li><strong>Gift code</strong> — redeem a gift code</li>
+          <li><strong>Send directly</strong> — send xDAI and xBZZ to your node wallet address, on Gnosis Chain only</li>
         </ul>
-        <a class="step-action" href="https://fund.bzz.limo" target="_blank">→ Fund your node</a>
+        <div class="step-desc">Once funds arrive, your node connects to the network — this usually takes 1–5 minutes.</div>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">03</div>
       <div class="step-content">
-        <div class="step-title">Buy a storage</div>
-        <div class="step-desc">Go to <strong>Account → <span class="tip" data-tip="You pay for storage by buying a postage stamp, which funds the nodes that keep your data available.">Stamps</span></strong> and click <strong>Buy New Postage Stamp Batch</strong>.</div>
+        <div class="step-title">Publish your site</div>
+        <div class="step-desc">Click <strong>Publish website</strong> in the sidebar and drop your site's build folder.</div>
         <ul class="step-list">
-          <li>Enter a batch name (e.g. <code>my-website</code>)</li>
-          <li>Select a storage size: <strong>4 GB</strong>, <strong>32 GB</strong>, or <strong>256 GB</strong></li>
-          <li>Drag the <strong>Data persistence</strong> slider to set how long you need storage (1–365 days)</li>
-          <li>Review the estimated cost shown by the app, then click <strong>Buy New Stamp</strong></li>
+          <li>Make sure the folder contains an <code>index.html</code> at its root — Nook finds it automatically</li>
+          <li>Pick a <span class="tip" data-tip="You pay for storage upfront, which funds the nodes that keep your data available.">storage size</span> and how long the site should stay up — the estimated cost in xBZZ is shown before you pay</li>
+          <li>Keep <strong>Permanent address</strong> on — you get one link that always points to your latest version</li>
+          <li>Click <strong>Publish</strong> — progress shows in the sidebar, and the bell tells you when it's live</li>
         </ul>
-        <div class="step-note">⚠ Storage expires when your stamp runs out — if it hits zero, your site will be taken offline. To extend: go to <strong>Account → Stamps</strong>, expand your stamp, and click <strong>Topup</strong>.</div>
+        <div class="step-note">⚠ Your site stays online only as long as its storage is paid for. To keep it up, open the drive in <strong>Drive</strong> and extend it, or turn on <strong>Auto-renew</strong> (Nook must be running for auto-renew to happen).</div>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">04</div>
       <div class="step-content">
-        <div class="step-title">Create a feed</div>
-        <div class="step-desc">A feed gives your site a <strong>permanent URL</strong> that always points to the latest version — even after you redeploy. Go to <strong>Account → Feeds → Create New Feed</strong>.</div>
+        <div class="step-title">Link your ENS domain</div>
+        <div class="step-desc">After publishing, click <strong>Link ENS domain</strong>. Nook sets your site's permanent address as the content hash of a <code>.eth</code> name you own.</div>
         <ul class="step-list">
-          <li>Enter an identity name (e.g. <code>website</code>)</li>
-          <li>Set a password and confirm — the app generates a Topic automatically</li>
-          <li>Copy the <strong>Feed Manifest URL</strong> — this is your permanent link for ENS and sharing</li>
+          <li>Connect the Ethereum wallet that owns the name</li>
+          <li>Pick your domain and confirm the transaction — it costs a small fee in ETH on Ethereum</li>
+          <li>Your site will be live at <code>yourname.eth.limo</code> and <code>yourname.bzz.link</code> within minutes <span class="tip" data-tip="eth.limo and bzz.link are centralized gateways. Your site can also be served directly via its Swarm hash for anyone running a Bee node."></span></li>
         </ul>
+        <div class="step-desc" style="margin-top:8px">Prefer to set it yourself? Copy the <strong>Permanent address</strong> from the publish screen and paste it into the <strong>Content Hash</strong> field on <a href="https://app.ens.domains" target="_blank" style="color:var(--accent)">app.ens.domains</a>:</div>
+        <div class="step-code"><span style="color:var(--muted)">bzz://</span>&lt;your-permanent-address&gt;</div>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">05</div>
       <div class="step-content">
-        <div class="step-title">Upload your site</div>
-        <div class="step-desc">Go to <strong>Files → Add Website</strong> and select your build output folder.</div>
-        <ul class="step-list">
-          <li>Make sure the folder contains an <code>index.html</code> at its root — that's the entry point Swarm serves</li>
-          <li>Wait for the upload to complete</li>
-          <li>Click <strong>Update Feed</strong>, select your feed and stamp, then click <strong>Update Selected Feed</strong></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">06</div>
-      <div class="step-content">
-        <div class="step-title">Link your ENS domain</div>
-        <div class="step-desc">Go to <strong>Account → Feeds</strong>, click your feed, and use <strong>View Feed Page</strong> to copy your permanent Feed Manifest URL. Then set it as your ENS content hash.</div>
-        <ul class="step-list">
-          <li>Go to <a href="https://app.ens.domains" target="_blank" style="color:var(--accent)">app.ens.domains</a> and open your <code>.eth</code> domain</li>
-          <li>Go to the <strong>Records</strong> tab and click <strong>Edit Records</strong></li>
-          <li>In the <strong>Content Hash</strong> field, paste your Feed Manifest URL</li>
-          </ul>
-          <div class="step-code"><span style="color:var(--muted)">bzz://</span>&lt;your-feed-manifest-hash&gt;</div>
-          <ul class="step-list" style="margin-top:8px">
-          <li>Save and confirm the transaction in your wallet</li>
-          <li>Your site will be live at <code>yourname.eth.limo</code> and <code>yourname.bzz.link</code> within minutes <span class="tip" data-tip="eth.limo and bzz.link are centralized gateways. Your site can also be served directly via its Swarm hash for anyone running a Bee node."></span></li>
-        </ul>
-        <a class="step-action" href="https://app.ens.domains" target="_blank">→ Open ENS App</a>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">07</div>
-      <div class="step-content">
         <div class="step-title">Update your site</div>
-        <div class="step-desc">Re-upload whenever your site changes — the Feed Manifest URL stays the same so your ENS record never needs updating.</div>
+        <div class="step-desc">Re-publish whenever your site changes — the permanent address stays the same, so your ENS record never needs updating.</div>
         <ul class="step-list">
-          <li>Go to <strong>Files → Add Website</strong> and select your new build folder</li>
-          <li>After upload completes, click <strong>Update Feed</strong> again</li>
+          <li>Go to <strong>Drive</strong> and find your site</li>
+          <li>Click <strong>Update content</strong> and drop your new build folder</li>
+          <li>The site switches to the new version once it's stored on the network</li>
         </ul>
       </div>
     </div>
   </div>
+
 
   <!-- ADVANCED STEPS -->
   <div class="steps-section" id="steps-advanced">
