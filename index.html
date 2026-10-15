@@ -162,8 +162,13 @@
     <div class="step">
       <div class="step-num">01</div>
       <div class="step-content">
-        <div class="step-title">Install Nook</div>
-        <div class="step-desc">Download it, open it and follow the setup. Nook runs its own Swarm node and walks you through the rest.</div>
+        <div class="step-title">Download & install Nook</div>
+        <div class="step-desc">Nook runs your own Swarm node and opens its dashboard in your browser — no terminal needed.</div>
+        <ul class="step-list">
+          <li>Download the installer for your OS and run it</li>
+          <li>Open Nook and follow the setup — skip Swarm ID if you only want to publish</li>
+          <li>Wait for <strong>Your node is ready</strong> and the green <strong>LIVE</strong> dot in the sidebar</li>
+        </ul>
         <a class="step-action" href="https://github.com/GasperX93/nook/releases/latest" target="_blank">→ Download Nook</a>
       </div>
     </div>
@@ -171,20 +176,26 @@
     <div class="step">
       <div class="step-num">02</div>
       <div class="step-content">
-        <div class="step-title">Add funds</div>
-        <div class="step-desc">Setup asks for a little <span class="tip" data-tip="xDAI pays network fees. xBZZ pays for storage.">xDAI</span> to connect your node, then add xBZZ for storage. Pay from almost any chain, redeem a gift code, or send to your node wallet on Gnosis.</div>
-        <div class="step-note">Add about 3 xBZZ on top of your site's cost — Nook keeps that for messaging and bandwidth.</div>
+        <div class="step-title">Fund your node</div>
+        <div class="step-desc">The setup shows <strong>Add funds to your node wallet</strong>. You need <span class="tip" data-tip="xDAI pays network fees. xBZZ pays for storage and bandwidth.">xDAI and xBZZ</span>. Three options:</div>
+        <ul class="step-list">
+          <li><strong>Add funds</strong> — top up from any chain and token, no bridging required</li>
+          <li><strong>Redeem gift code</strong> — paste your code</li>
+          <li><strong>Send directly</strong> — send xDAI and xBZZ to your node address on Gnosis</li>
+        </ul>
+        <div class="step-note">Add about 3 xBZZ on top of your site's cost — Nook keeps it for messaging and bandwidth.</div>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">03</div>
       <div class="step-content">
-        <div class="step-title">Publish</div>
-        <div class="step-desc"><strong>Publish website</strong> → drop your build folder → pick size and time → <strong>Publish</strong>.</div>
+        <div class="step-title">Publish your site</div>
+        <div class="step-desc">Click <strong>Publish website</strong> in the sidebar.</div>
         <ul class="step-list">
-          <li>Keep <strong>Permanent address</strong> on: one link that stays the same when you update</li>
-          <li>Turn on <strong>Auto-extend</strong> in Drive so the site doesn't expire</li>
+          <li>Drop your build folder — it needs an <code>index.html</code> at the root</li>
+          <li>Pick storage size and how long, check the estimated cost, click <strong>Publish</strong></li>
+          <li>Keep <strong>Permanent address</strong> on — one link for every future update</li>
         </ul>
       </div>
     </div>
@@ -192,16 +203,25 @@
     <div class="step">
       <div class="step-num">04</div>
       <div class="step-content">
-        <div class="step-title">Link your ENS name</div>
-        <div class="step-desc">Click <strong>Link ENS domain</strong>, pick your <code>.eth</code> name and confirm in the wallet that owns it. Your site is live at <code>yourname.eth.limo</code> within minutes.</div>
+        <div class="step-title">Link your ENS domain</div>
+        <div class="step-desc">Nook links it for you, right from the publish screen.</div>
+        <ul class="step-list">
+          <li>Click <strong>Link ENS domain</strong> and connect the wallet that owns the name</li>
+          <li>Pick your <code>.eth</code> name and confirm the transaction</li>
+          <li>Your site is live at <code>yourname.eth.limo</code> within minutes</li>
+        </ul>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">05</div>
       <div class="step-content">
-        <div class="step-title">Update</div>
-        <div class="step-desc"><strong>Drive</strong> → your site → <strong>Update content</strong> → drop the new build. Same address, nothing to change on ENS.</div>
+        <div class="step-title">Update & keep it online</div>
+        <div class="step-desc">Everything lives in <strong>Drive</strong>, on your site's row.</div>
+        <ul class="step-list">
+          <li><strong>Update content</strong> — drop a new build; the address and ENS stay the same</li>
+          <li><strong>Auto-extend</strong> — keeps the storage paid so the site doesn't expire (Nook needs to be running)</li>
+        </ul>
       </div>
     </div>
   </div>
