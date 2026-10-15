@@ -645,6 +645,10 @@ nav {
   text-decoration: none;
   transition: all 0.15s;
 }
+/* Small lines under the Nook download button */
+.nook-download-note { font-size: 13px; margin-top: 8px; }
+.nook-download-note + .nook-download-note { margin-top: 2px; }
+
 .step-action:hover {
   border-color: var(--accent);
   color: var(--accent);

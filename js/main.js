@@ -157,3 +157,87 @@ function showSteps(level) {
     }, 50);
   }
 }
+
+// Nook download button: link straight to the file for the visitor's system.
+// Same logic as the Nook website (nook-drive.eth.limo, app.js). Without an
+// answer from GitHub, or on an unknown system, the button keeps pointing at
+// the latest-release page.
+(function nookDownload() {
+  const button = document.querySelector('.js-nook-download');
+  if (!button) return;
+  const label = document.querySelector('.js-nook-download-label');
+  const note = document.querySelector('.js-nook-download-note');
+  const REPO = 'GasperX93/nook';
+
+  function detectOs() {
+    const p = ((navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '').toLowerCase();
+    const ua = navigator.userAgent.toLowerCase();
+    if (/iphone|ipad|ipod|android/.test(ua)) return 'mobile';
+    if (p.includes('mac') || ua.includes('mac os')) return 'mac';
+    if (p.includes('win') || ua.includes('windows')) return 'windows';
+    if (p.includes('linux') || ua.includes('linux')) return 'linux';
+    return 'unknown';
+  }
+
+  // Apple silicon vs Intel: only Chromium browsers can tell. Safari always
+  // reports Intel, so default to Apple silicon and always offer the Intel build.
+  function detectMacArch() {
+    const uad = navigator.userAgentData;
+    if (!uad || !uad.getHighEntropyValues) return Promise.resolve('arm64');
+    return uad.getHighEntropyValues(['architecture'])
+      .then(v => (v && v.architecture === 'x86' ? 'x64' : 'arm64'))
+      .catch(() => 'arm64');
+  }
+
+  function link(href, text) {
+    const a = document.createElement('a');
+    a.href = href;
+    a.target = '_blank';
+    a.textContent = text;
+    return a;
+  }
+
+  function show(href, text, noteParts) {
+    button.href = href;
+    label.textContent = text;
+    note.replaceChildren(...noteParts);
+  }
+
+  const os = detectOs();
+  if (os === 'mobile') {
+    show(button.href, 'Download Nook', ['Nook runs on macOS, Windows and Linux']);
+    return;
+  }
+
+  Promise.all([
+    fetch('https://api.github.com/repos/' + REPO + '/releases/latest', { headers: { Accept: 'application/vnd.github+json' } })
+      .then(r => (r.ok ? r.json() : null))
+      .catch(() => null),
+    os === 'mac' ? detectMacArch() : Promise.resolve(null),
+  ]).then(([release, arch]) => {
+    if (!release || !Array.isArray(release.assets)) return;
+    const find = re => {
+      const asset = release.assets.find(x => re.test(x.name));
+      return asset ? asset.browser_download_url : null;
+    };
+    const v = ' · v' + String(release.tag_name || '').replace(/^v/, '');
+
+    if (os === 'mac') {
+      const arm = find(/-arm64\.dmg$/i);
+      const intel = find(/-x64\.dmg$/i);
+      const primary = arch === 'x64' ? intel : arm;
+      const other = arch === 'x64' ? arm : intel;
+      if (!primary) return;
+      const parts = [(arch === 'x64' ? 'Intel' : 'Apple silicon') + v];
+      if (other) parts.push(' · ', link(other, arch === 'x64' ? 'Apple silicon' : 'Intel Mac'), '?');
+      show(primary, 'Download Nook for Mac', parts);
+    } else if (os === 'windows') {
+      const exe = find(/setup\.exe$/i);
+      if (exe) show(exe, 'Download Nook for Windows', ['Windows 10 and later' + v]);
+    } else if (os === 'linux') {
+      const deb = find(/\.deb$/i);
+      const rpm = find(/\.rpm$/i);
+      if (deb) show(deb, 'Download Nook for Linux', rpm ? ['.deb' + v + ' · ', link(rpm, '.rpm')] : ['.deb' + v]);
+    }
+  });
+})();
