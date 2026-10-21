@@ -13,6 +13,14 @@ Walks users through three deployment paths based on their comfort level:
 | **Advanced** | [Bee](https://github.com/ethersphere/bee) + [swarm-cli](https://github.com/ethersphere/swarm-cli) | CLI, scriptable, CI/CD |
 
 
+## Publishing
+
+Upload the `publish/` folder to Swarm (git-ignored; contains only the site files). Refresh it from `main` before every upload:
+
+```sh
+rm -rf publish && mkdir publish && git archive main index.html css js assets | tar -x -C publish
+```
+
 ## Key interactions
 
 - **Skill cards** — clicking Easy / Intermediate / Advanced calls `showSteps(level)`, which shows the matching `.steps-section` and smooth-scrolls to it
